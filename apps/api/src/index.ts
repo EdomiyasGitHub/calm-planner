@@ -1,5 +1,9 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { API_VERSION, APP_NAME } from "@calm/core";
+
+/** Origins the Android app (Capacitor WebView) uses. The web app is same-origin and needs no CORS. */
+export const APP_ORIGINS = ["https://localhost", "capacitor://localhost", "http://localhost"];
 
 export interface Env {
   DB: D1Database;
@@ -10,6 +14,16 @@ export interface Env {
 export const app = new Hono<{ Bindings: Env }>();
 
 const api = new Hono<{ Bindings: Env }>();
+
+api.use(
+  "*",
+  cors({
+    origin: APP_ORIGINS,
+    allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization", "X-App-Version"],
+    maxAge: 86400,
+  }),
+);
 
 api.get("/health", async (c) => {
   let db: "ok" | "error" = "ok";

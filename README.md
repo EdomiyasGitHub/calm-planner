@@ -2,7 +2,7 @@
 
 A calm, predictable personal planner: type a task in plain language and a deterministic engine finds a realistic time for it. Web app + Android app from one TypeScript codebase, running on Cloudflare's free plan.
 
-The full plan lives in the **Build & Deploy Handbook**. This README covers running the code.
+The full plan lives in the **Build & Deploy Handbook**. This README covers running the code. For a step-by-step first setup, see [docs/setup/phase-0.md](docs/setup/phase-0.md).
 
 ## Structure
 

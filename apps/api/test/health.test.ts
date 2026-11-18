@@ -42,6 +42,39 @@ describe("GET /api/v1/health", () => {
   });
 });
 
+describe("CORS for the Android app", () => {
+  it("allows the Capacitor origin", async () => {
+    const res = await app.request(
+      "/api/v1/health",
+      { headers: { Origin: "https://localhost" } },
+      fakeEnv(workingDb),
+    );
+    expect(res.headers.get("Access-Control-Allow-Origin")).toBe("https://localhost");
+  });
+
+  it("answers preflight requests", async () => {
+    const res = await app.request(
+      "/api/v1/health",
+      {
+        method: "OPTIONS",
+        headers: { Origin: "https://localhost", "Access-Control-Request-Method": "POST" },
+      },
+      fakeEnv(workingDb),
+    );
+    expect(res.status).toBe(204);
+    expect(res.headers.get("Access-Control-Allow-Origin")).toBe("https://localhost");
+  });
+
+  it("does not allow other websites", async () => {
+    const res = await app.request(
+      "/api/v1/health",
+      { headers: { Origin: "https://evil.example" } },
+      fakeEnv(workingDb),
+    );
+    expect(res.headers.get("Access-Control-Allow-Origin")).toBeNull();
+  });
+});
+
 describe("routing", () => {
   it("returns JSON 404 for unknown API routes", async () => {
     const res = await app.request("/api/v1/nope", {}, fakeEnv(workingDb));
