@@ -1,0 +1,20 @@
+{
+  "name": "calm-planner",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter web --filter api dev",
+    "build": "pnpm --filter core build && pnpm --filter web build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "check": "pnpm typecheck && pnpm test && pnpm build"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
+  }
+}

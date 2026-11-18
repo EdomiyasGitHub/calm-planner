@@ -1,0 +1,8 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Native binaries needed by Vite (esbuild) and local Workers runtime (workerd).
+onlyBuiltDependencies:
+  - esbuild
+  - workerd

@@ -1,0 +1,10 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+# Secrets are added phase by phase; Phase 0 needs none.
+
+# Phase 5 (sign-in):
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=
+# TOKEN_ENCRYPTION_KEY=   # openssl rand -base64 32
+
+# Phase 8 (Google Calendar):
+# WEBHOOK_CHANNEL_SECRET= # openssl rand -base64 32
