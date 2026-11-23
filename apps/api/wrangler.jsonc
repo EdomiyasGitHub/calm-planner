@@ -1,28 +1,36 @@
 {
-  // One Worker serves the web app's static files and the /api routes.
-  "$schema": "../../node_modules/wrangler/config-schema.json",
-  "name": "calm-planner",
-  "main": "src/index.ts",
-  "compatibility_date": "2026-11-01",
-  "assets": {
-    "directory": "../web/dist",
-    "binding": "ASSETS",
-    "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
-  },
-  "vars": {
-    "APP_ENV": "development"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "calm-planner-prod",
-      // Replace with the id printed by: wrangler d1 create calm-planner-prod
-      "database_id": "00000000-0000-0000-0000-000000000000",
-      "migrations_dir": "migrations"
-    }
-  ],
-  "observability": {
-    "enabled": true
-  }
+	// One Worker serves the web app's static files and the /api routes.
+	"$schema": "../../node_modules/wrangler/config-schema.json",
+	"name": "calm-planner",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-11-01",
+	"assets": {
+		"directory": "../web/dist",
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application",
+		"run_worker_first": [
+			"/api/*"
+		]
+	},
+	"vars": {
+		"APP_ENV": "development"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "calm-planner-prod",
+			// Replace with the id printed by: wrangler d1 create calm-planner-prod
+			"database_id": "d1878f93-934f-4d21-969b-1c1661eb9303",
+			"migrations_dir": "migrations"
+		},
+		{
+			"binding": "calm_planner_prod",
+			"database_name": "calm-planner-prod",
+			"database_id": "d1878f93-934f-4d21-969b-1c1661eb9303",
+			"remote": true
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
 }
